@@ -2,12 +2,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:contacts_service/contacts_service.dart';
 import 'prefHandler.dart';
-import 'database_handler.dart';
-import 'package:flutter/services.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'backButton.dart';
-import 'package:callstatus/ui/background.dart';
-import 'package:callstatus/uiComponents/dialog.dart';
+
 class AvatarColor{
 static const colors=[
       Colors.green,
@@ -77,14 +72,16 @@ _phones.add(_validateContact(phone.value));
 
     phones=_phones.toSet().toList();
 
-      ContactsService.getAvatar(contact).then((_avatar) {
+
+
+    /*  ContactsService.getAvatar(contact).then((_avatar) {
         Uint8List nullAvatar = Uint8List(2);
         if (_avatar == null) 
         avatar=nullAvatar; // Don't redraw if no change.
         else
         avatar = _avatar;
         });
-      
+      */
 
 }
 
@@ -145,7 +142,11 @@ String _getAvatarHash(){
 }
 
 _setAvatarFromHash(String avatarHash){
-  Uint8List _avatar= new Uint8List.fromList(avatarHash.split(",").map((i)=>int.parse(i)).toList());
+  Uint8List _avatar;
+  if(avatarHash.length<10)
+_avatar = Uint8List(2);
+else
+  _avatar= new Uint8List.fromList(avatarHash.split(",").map((i)=>int.parse(i)).toList());
 avatar= _avatar;
 }
 
@@ -200,7 +201,7 @@ static Future<List<String>> getAvatarHashFromSharedPref() async{
 
 //Display
 
-
+/*
 
 class MyContactDisplay extends StatefulWidget {
 final MyContact contact;
@@ -605,3 +606,4 @@ home:
 )
 
 );
+*/

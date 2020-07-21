@@ -1,41 +1,48 @@
 
+import 'package:callstatus/handler/dialogHandler.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../uiComponents/dialog.dart';
+import 'package:callstatus/uiComponents/dialog.dart';
+import 'package:callstatus/handler/firebaseLoginHandler.dart';
 class FirestoreHandler{
 
-  saveFireStoreData(phone,data){
+  saveFireStoreData(data){
+    String phone=FirebaseLoginHandler.phone;
  Firestore.instance
-            .collection('test')
+            .collection('status')
             .document(phone).setData(data);
   }
 
- Future<Map>  getFirestoreData( context, phone) async{
+ void  getFirestoreData( context, phone) async{
          return Firestore.instance
-            .collection('test')
-            .document("00")
+            .collection('status')
+            .document(phone)
             .get()
             .then((DocumentSnapshot ds){
-//print(ds.data);
 
+//print(ds.data);
+              if(ds.exists)
+{
 Map<String,dynamic> data =  ds.data;
+Navigator.pop(context);
   showDialog(
       context: context,
       builder: (BuildContext context) => CustomDialog(
-        phone:phone,
-        title: data["Title"],
-        status:data["Subtitle"],
-        overlayImage:Image.asset("assets/images/gun.png"),
-isLocalImage:true,
-bgColor: Colors.cyan,
-titleColor:Colors.black87,
-statusColor: Colors.black45,
-isEditing:false,
-sidePadding:0,
-topPadding:0,
+       myDialog: 
+        new MyDialog(data["title"], data["status"], phone, data["imageLoc"], data["bgColor"], data["titleColor"],
+         data["statusColor"], data["isLocalImage"], false, data["sidePadding"], data["topPadding"])
+ 
       ),
     );
- return data;
+}
+else
+{
+  Navigator.pop(context);
+
+showDialog(context: context,  builder: (BuildContext context) => CustomDialog(
+       myDialog: MyDialog.getNotInstalledDialog()));
+}
+ //return data;
             });
   }
 

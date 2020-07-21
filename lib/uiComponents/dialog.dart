@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-import 'bottomDialog.dart';
-import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
-import 'roundedButton.dart';
-import 'colors.dart';
-import '../ui/background.dart';
+import 'package:callstatus/handler/dialogHandler.dart';
+
 class Consts {
   Consts._();
 
@@ -13,37 +10,21 @@ class Consts {
 }
 
 class CustomDialog extends StatelessWidget {
-  final String title, status, phone;
-  final Color bgColor,titleColor,statusColor;
-  final Image overlayImage;
-  final BuildContext dialogContext;
- // final Image overlayImage;
-  final bool isLocalImage,isEditing;
-  final double sidePadding, topPadding;
+  final MyDialog myDialog;
 
   CustomDialog({
-    this.isEditing,
-    this.phone,
-    this.title,
-    this.status,
-    this.overlayImage,
-    this.isLocalImage,
-    this.bgColor,
-    this.titleColor,
-    this.statusColor,
-    this.dialogContext,
-    this.sidePadding,
-this.topPadding
+    this.myDialog,
   });
 
   @override
   Widget build(BuildContext context){
+ 
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(Consts.padding),
       ),
       elevation: 1.0,
-      backgroundColor:bgColor,
+      backgroundColor:Color(myDialog.bgColor),
       child: dialogContent(context),
 
     );
@@ -53,7 +34,11 @@ this.topPadding
 
 
  dialogContent(BuildContext context) {
+      Image overlayImage =  myDialog.isLocalImage?Image.asset(myDialog.imageLoc,
+):Image.network(myDialog.imageLoc,
+  fit: BoxFit.fill,
 
+);
     return Stack(
       children: <Widget>[
   
@@ -73,27 +58,27 @@ this.topPadding
   
           ),
           child: Padding(
-            padding: EdgeInsets.only(top: topPadding,left: sidePadding,right: sidePadding),
+            padding: EdgeInsets.only(top: myDialog.topPadding,left: myDialog.sidePadding,right: myDialog.sidePadding),
             child: Column(
               mainAxisSize: MainAxisSize.min, // To make the card compact
               children: <Widget>[
                 Text(
-                  title,
+                  myDialog.title,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 24.0,
                     fontWeight: FontWeight.w700,
-                    color: titleColor
+                    color: Color(myDialog.titleColor)
                   ),
                 ),
                 SizedBox(height: 16.0),
                 Text(
-                  status,
+                  myDialog.status,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
-                    color:statusColor
+                    color:Color(myDialog.statusColor)
                   ),
                 ),
                 SizedBox(height: 24.0),
@@ -101,13 +86,13 @@ this.topPadding
                   alignment: Alignment.bottomRight,
                   child: IconButton(
                     onPressed: () {
-                      if(!isEditing)
-                     {_makePhoneCall(phone);
+                      if(!myDialog.isEditing)
+                     {_makePhoneCall(myDialog.phone);
                       Navigator.of(context).pop(); }// To close the dialog
                     },
                     icon: Icon(Icons.call),
                     iconSize: 40,
-                    color: titleColor,
+                    color: Color(myDialog.titleColor),
                       
                   ),
                 ),
@@ -162,315 +147,10 @@ this.topPadding
   }*/
 }
 
-
+/*
 main()=>runApp(MaterialApp(
 
   home:MyDialogEditor()
 ));
-
-class MyDialogEditor extends StatefulWidget {
-  MyDialogEditor({Key key}) : super(key: key);
-
-  @override
-  _MyDialogEditorState createState() => _MyDialogEditorState();
-}
-
-class _MyDialogEditorState extends State<MyDialogEditor> {
-String name,status,imageLoc,phone;
-bool isLocalImage,isEditing;
-Color bgColor,titleColor,statusColor;
-double sidePadding,topPadding;
-
-@override
-  void initState() {
-    super.initState();
-name="Playing PUBG";
-status="I am playing right now, call me after sometime...";
-phone="9850477230";
-imageLoc="assets/images/gun.png";
-isLocalImage=true;
-bgColor= Colors.cyan;
-titleColor= Colors.black87;
-statusColor= Colors.black45;
-isEditing=true;
-sidePadding=0;
-topPadding=0;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-
-    Image overlayImage =  isLocalImage?Image.asset(imageLoc,
-):Image.network(imageLoc,
-  fit: BoxFit.fill,
-
-);
-    return      Scaffold(
-
-    body:Stack(
-          children: <Widget>[
-            Opacity(
-              opacity: 1,
-              child:Background()),
-    
- Column(
-   children: <Widget>[
-     Container(
-       height: MediaQuery.of(context).size.height/2.2,
-       child: SingleChildScrollView(
-              child: CustomDialog(
-          phone:phone,
-          title: name,
-          status: status,
-         overlayImage: overlayImage,
-isLocalImage: isLocalImage,
-bgColor: bgColor,
-titleColor: titleColor,
-statusColor: statusColor,
-isEditing: isEditing,
-sidePadding: sidePadding,
-topPadding: topPadding,
-),
-       ),
-     ),
-     Expanded(
-            child: SingleChildScrollView(
-        //controller: controller,
-        child: Column(
-          children:[
-createInputWidget(buildTitle(context)),
-
-
-createInputWidget(buildStatus(context)),
-
-createInputWidget(buildBackground(context)),
-         
-
-createInputWidget(
-Row(children: <Widget>[
-       Text("Top Margin "),
-        Expanded(
-            child: Slider(
-              min: 0,
-              max: 100,
-              value: topPadding,
-              onChanged: (value) {
-                setState(() {
-                  topPadding = value;
-                });
-              },
-            ),
-        ),
-
-],),
-),
-
-
-createInputWidget(
-Row(children: <Widget>[
-       Text("Side Margin"),
-        Expanded(
-            child: Slider(
-              min: 0,
-              max: 100,
-              value: sidePadding,
-              onChanged: (value) {
-                setState(() {
-                  sidePadding = value;
-                });
-              },
-            ),
-        ),
-
-],),
-),
-
-
-       
-          ]),
-),
-     ),
- 
-          GestureDetector(
-           onTap:(){
-                                       FocusScope.of(context).requestFocus(FocusNode());
-
-             showDialog(context: context,
-         child: CustomDialog(
-        phone:phone,
-        title: name,
-        status: status,
-       overlayImage: overlayImage,
-isLocalImage: isLocalImage,
-bgColor: bgColor,
-titleColor: titleColor,
-statusColor: statusColor,
-isEditing: isEditing,
-sidePadding: sidePadding,
-topPadding: topPadding,
-)
-         );},
-child:roundedRectButton("Preview", signInGradients, false),
-         ),
- 
-   ],
- ),
-
-
-])
-  )
-    ;
-  }
-
-createInputWidget(inputWidget){
- return Padding(
-              padding: EdgeInsets.only(right: 10, bottom: 10),
-              child: Container(
-                width: MediaQuery.of(context).size.width - 10,
-                child: Material(
-                  elevation: 10,
-                  color: Colors.white,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(0),
-                          topRight: Radius.circular(30))),
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        left: 40, right: 20, top: 10, bottom: 10),
-                    child: inputWidget,
-                  ),
-                ),
-              ),
-            );
-}
-
-  Row buildBackground(BuildContext context) {
-    return 
-    
-    Row(children: <Widget>[
-
-
-SizedBox(width: MediaQuery.of(context).size.width-110,
-child:
-TextField(
-decoration: InputDecoration(
-  hintText: "Background Image"
-),
-onChanged: (value)=> setState((){
-imageLoc=value;
-isLocalImage=false;
-})
-
-)),
-GestureDetector(
-onTap: () { changeBgColor();},
-child:
-CircleAvatar(
-backgroundColor: bgColor,
-
-)
-)
-,
-],);
-  }
-
-  Row buildStatus(BuildContext context) {
-    return Row(children: <Widget>[
-SizedBox(width: MediaQuery.of(context).size.width-110,
-child:
-TextField(
-decoration: InputDecoration(
-  hintText: "Status"
-),
-onChanged: (value)=> setState((){
-status=value;
-}),
-
-)),
-
-GestureDetector(
-onTap: () {changeStatusColor();},
-child:
-CircleAvatar(
-
-backgroundColor: statusColor,
-)),
-],);
-  }
-
-  Row buildTitle(BuildContext context) {
-    return Row(children: <Widget>[
-
-SizedBox(width: MediaQuery.of(context).size.width-110,
-child:
-TextField(
-
-decoration: InputDecoration(
-  hintText: "Title"
-),
-onChanged: (value)=> setState((){
-name=value;
-}),
-)),
-GestureDetector(
-onTap: () { changeTitleColor();},
-child:
-CircleAvatar(
-
-backgroundColor: titleColor,
-)
-),
-],)
-;
-
-
-  }
-
-
-    void changeBgColor() async {
-    showBottomDialog(context,
-      MaterialColorPicker(
-        colors: fullMaterialColors,
-        selectedColor: bgColor,
-                onColorChange: (color) => setState(() { bgColor = color;
-                }),
-
- 
-      ),
-    );
-  }
-
-
-    void changeTitleColor() async {
-    showBottomDialog(context,
-      MaterialColorPicker(
-        colors: fullMaterialColors,
-        selectedColor: titleColor,
-                onColorChange: (color) => setState(() { titleColor = color;
-                }),
-
- 
-      ),
-    );
-  }
-
-
-
-  
-    void changeStatusColor() async {
-    showBottomDialog(context,
-      MaterialColorPicker(
-        colors: fullMaterialColors,
-        selectedColor: statusColor,
-                onColorChange: (color) => setState(() { statusColor = color;
-                }),
-
- 
-      ),
-    );
-  }
-
-
-}
-
+*/
 

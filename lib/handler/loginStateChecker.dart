@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'firebaseLoginHandler.dart';
-import '../ui/background.dart';
-import '../ui/login.dart';
-import '../ui/myHomePage.dart';
+import 'package:callstatus/ui/mainContainer.dart';
+import 'package:callstatus/ui/login.dart';
 import 'package:flutter/services.dart';
+import 'package:callstatus/ui/displayAllContacts.dart';
 
 
 class LoginStateChecker extends StatelessWidget {
@@ -17,10 +17,13 @@ class LoginStateChecker extends StatelessWidget {
 
 
  FirebaseLoginHandler().isUserLoggedIn().then((value) => 
-    {    if(value)
+    {    
+      
+
+  if(value)
   Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => MyHomePage(title: 'Call Status')),
+    MaterialPageRoute(builder: (context) => DisplayAllContacts()),
   )
   else
   Navigator.push(
@@ -31,20 +34,25 @@ class LoginStateChecker extends StatelessWidget {
     );
 
 
-    return Scaffold(
-      body: 
-      Stack(children: <Widget>[
-Background(),
-Center(child: 
-Column(
-  mainAxisAlignment: MainAxisAlignment.center,
-  children:[
-CircularProgressIndicator(backgroundColor: Colors.red,),
-            Text("Checking Login Status", 
-            style:TextStyle(fontSize: 20)),
-])
-)
-      ],)
-    );
+    return 
+MainContainer(
+  content:   Center(child: 
+  
+  Column(
+  
+    mainAxisAlignment: MainAxisAlignment.center,
+  
+    children:[
+  
+  CircularProgressIndicator(backgroundColor: Colors.red,),
+  
+              Text("Checking Login Status", 
+  
+              style:TextStyle(fontSize: 20)),
+  
+  ])
+  
+  ),
+);
   }
 }

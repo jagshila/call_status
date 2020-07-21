@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 //import '../uiComponents/roundedButton.dart';
-import '../uiComponents/inputWidget.dart';
-import '../uiComponents/textLogo.dart';
+import 'package:callstatus/uiComponents/inputWidget.dart';
+import 'package:callstatus/uiComponents/textLogo.dart';
 import 'package:flutter/services.dart';
 //import '../uiComponents/colors.dart';
-import '../ui/background.dart';
-import '../handler/backButton.dart';
+import 'package:callstatus/ui/mainContainer.dart';
+import 'package:callstatus/handler/backButton.dart';
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
@@ -29,19 +29,15 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return WillPopScope(
     onWillPop: ()=>onBackPressed(context),
-    child:Scaffold(
+    child:MainContainer(
       //  resizeToAvoidBottomPadding: false,
      // resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
-        body: 
+        content: 
           SingleChildScrollView(child:
           Container(
             height: MediaQuery.of(context).size.height,
             child: 
-        Stack(
-          children: <Widget>[
-
-              Background(),
+  
     
   
         Column(
@@ -70,8 +66,7 @@ class _LoginState extends State<Login> {
           ],
         
     )
-          ]
-        )
+       
     )
     )
     )

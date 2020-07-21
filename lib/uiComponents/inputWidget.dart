@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../uiComponents/colors.dart';
+import '../uiComponents/myColors.dart';
 import '../handler/firebaseLoginHandler.dart';
 
 class InputWidgetMobile extends StatefulWidget {

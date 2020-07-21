@@ -12,14 +12,7 @@ backgroundColor: Color.fromARGB(180, 255, 255, 255),
         height: 230,
         child:Stack(
         children: <Widget>[
-Align(
-  alignment: Alignment.topRight,
-  child: IconButton(icon: Icon(Icons.close),
-  iconSize: 30,
-  color: Colors.black87,
-  onPressed: ()=>Navigator.pop(context),),
 
-),
 Column(children: <Widget>[
 SizedBox(height: 10,),
 Container(
@@ -32,6 +25,15 @@ height: 220,
 )
 
 ],),
+
+Align(
+  alignment: Alignment.topRight,
+  child: IconButton(icon: Icon(Icons.close),
+  iconSize: 30,
+  color: Colors.black87,
+  onPressed: ()=>Navigator.pop(context),),
+
+),
 
         ],
             

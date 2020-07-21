@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 
 Widget roundedRectButton(
-    String title, List<Color> gradient, bool isEndIconVisible) {
+    String title, List<Color> gradient,double divisionFactor, bool isEndIconVisible) {
   return Builder(builder: (BuildContext mContext) {
     return Padding(
       padding: EdgeInsets.only(bottom: 10),
@@ -12,7 +12,7 @@ Widget roundedRectButton(
         children: <Widget>[
           Container(
             alignment: Alignment.center,
-            width: MediaQuery.of(mContext).size.width / 1.7,
+            width: MediaQuery.of(mContext).size.width / divisionFactor,
             decoration: ShapeDecoration(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0)),

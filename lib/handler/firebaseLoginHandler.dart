@@ -1,28 +1,38 @@
 
+import 'package:callstatus/handler/loginStateChecker.dart';
+import 'package:callstatus/ui/displayAllContacts.dart';
+import 'package:callstatus/ui/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../ui/myHomePage.dart';
 class FirebaseLoginHandler{
 String _verificationId;
 String _message;
 final FirebaseAuth _auth = FirebaseAuth.instance;
 static int uiCode;
 static int resendingToken=0;
+static String phone;
+
 ///0->Initiated
 ///1->Successfully signed in
 ///2->Code sent
 ///3->Failed
 
 
+
+
 Future<bool> isUserLoggedIn() async{
-if (await FirebaseAuth.instance.currentUser() != null) 
-return true;
+  FirebaseUser user;
+if ((user = await FirebaseAuth.instance.currentUser()) != null) 
+{
+  phone = user.phoneNumber;
+  return true;}
 else
 return false;
 }
 
 
 void verifyPhoneNumber(BuildContext context, String phoneNumber) async {
+  phone=phoneNumber;
       _message = '';
       uiCode=0;
       print("Checking for "+ phoneNumber);
@@ -32,11 +42,9 @@ void verifyPhoneNumber(BuildContext context, String phoneNumber) async {
       _auth.signInWithCredential(phoneAuthCredential);
         _message = 'Received phone auth credential: $phoneAuthCredential';
         print("PhoneVerificationCompleted "+_message);
+        loginSuccessRedirect(context);
+phone=phoneNumber;
 
-Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => MyHomePage(title: 'Call Status')),
-  );
 
 
     };
@@ -106,10 +114,7 @@ await _auth.verifyPhoneNumber(
             .document(user.phoneNumber).setData({"Display Name":"Ak", "Status":"Free"});*/
             uiCode=1;
         _message = 'Successfully signed in, uid: ' + user.uid;
-        Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => MyHomePage(title: 'Call Status')),
-  );
+ loginSuccessRedirect(context);
         print(_message);
    /*     Firestore.instance
             .collection('status')
@@ -125,6 +130,7 @@ print(_message);
       } else {
         uiCode=-1;
         _message = 'Sign in failed';
+        loginFailedRedirect(context);
       }
   }
 
@@ -138,6 +144,28 @@ void signOut()  async{
 }
 
 
+
+void loginSuccessRedirect(context){
+            Scaffold.of(context).showSnackBar(const SnackBar(
+        content: Text('Sign in successfull.'),
+      ));
+Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => DisplayAllContacts()),
+  );
+}
+
+void loginFailedRedirect(context)
+{
+            Scaffold.of(context).showSnackBar(const SnackBar(
+        content: Text('Sign in failed. Please try again.'),
+      ));
+Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => Login()),
+  );
+
+}
 
 redirectToPage(){
 switch(uiCode){

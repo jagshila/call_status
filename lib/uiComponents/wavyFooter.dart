@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:callstatus/uiComponents/colors.dart';
+import 'package:callstatus/uiComponents/myColors.dart';
 class WavyFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

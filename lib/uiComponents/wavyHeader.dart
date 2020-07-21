@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'colors.dart';
+import 'myColors.dart';
 class WavyHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
