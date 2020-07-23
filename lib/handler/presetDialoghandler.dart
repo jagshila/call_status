@@ -17,23 +17,23 @@ static resetAllPresetDialogs()
   {
     isInitiated=true;
 String presetString;
-presetString = "Driving"+"/-1-/"+ "I am driving right now. Please Call me after some time."+"/-1-/"+ "assets/images/1.png"+"/-1-/"+ Colors.orange.value.toString()+"/-1-/"+ Colors.purple.value.toString()+"/-1-/"+ Colors.amber.value.toString()+"/-1-/"+(true).toString()+"/-1-/"+ (0).toString()+"/-1-/"+ (0).toString();
+presetString = "Driving"+"/-1-/"+ "I am driving right now. Please Call me after some time."+"/-1-/"+ "assets/images/1.png"+"/-1-/"+ Colors.orange.value.toString()+"/-1-/"+ Colors.purple.value.toString()+"/-1-/"+ Colors.amber.value.toString()+"/-1-/"+(true).toString()+"/-1-/"+ (0).toString()+"/-1-/"+ (0).toString()+"/-1-/"+(3600).toString();
 presetStrings.add(presetString);
-presetString = "Sleeping"+"/-1-/"+ "I am sleeping right now. Please Call me after some time."+"/-1-/"+ "assets/images/1.png"+"/-1-/"+ Colors.orange.value.toString()+"/-1-/"+ Colors.purple.value.toString()+"/-1-/"+ Colors.amber.value.toString()+"/-1-/"+(true).toString()+"/-1-/" + (0).toString()+"/-1-/"+ (0).toString();
+presetString = "Sleeping"+"/-1-/"+ "I am sleeping right now. Please Call me after some time."+"/-1-/"+ "assets/images/1.png"+"/-1-/"+ Colors.orange.value.toString()+"/-1-/"+ Colors.purple.value.toString()+"/-1-/"+ Colors.amber.value.toString()+"/-1-/"+(true).toString()+"/-1-/" + (0).toString()+"/-1-/"+ (0).toString()+"/-1-/"+(3600).toString();
 presetStrings.add(presetString);
-presetString = "Studying"+"/-1-/"+ "I am studying right now. Please Call me after some time."+"/-1-/"+ "assets/images/1.png"+"/-1-/"+ Colors.orange.value.toString()+"/-1-/"+ Colors.purple.value.toString()+"/-1-/"+ Colors.amber.value.toString()+"/-1-/"+(true).toString()+"/-1-/" + (0).toString()+"/-1-/"+ (0).toString();
+presetString = "Studying"+"/-1-/"+ "I am studying right now. Please Call me after some time."+"/-1-/"+ "assets/images/1.png"+"/-1-/"+ Colors.orange.value.toString()+"/-1-/"+ Colors.purple.value.toString()+"/-1-/"+ Colors.amber.value.toString()+"/-1-/"+(true).toString()+"/-1-/" + (0).toString()+"/-1-/"+ (0).toString()+"/-1-/"+(3600).toString();
 presetStrings.add(presetString);
-presetString = "Working"+"/-1-/"+ "I am working right now. Please Call me after some time."+"/-1-/"+ "assets/images/1.png"+"/-1-/"+ Colors.orange.value.toString()+"/-1-/"+ Colors.purple.value.toString()+"/-1-/"+ Colors.amber.value.toString()+"/-1-/"+(true).toString()+"/-1-/" + (0).toString()+"/-1-/"+ (0).toString();
+presetString = "Working"+"/-1-/"+ "I am working right now. Please Call me after some time."+"/-1-/"+ "assets/images/1.png"+"/-1-/"+ Colors.orange.value.toString()+"/-1-/"+ Colors.purple.value.toString()+"/-1-/"+ Colors.amber.value.toString()+"/-1-/"+(true).toString()+"/-1-/" + (0).toString()+"/-1-/"+ (0).toString()+"/-1-/"+(3600).toString();
 presetStrings.add(presetString);
-presetString = "Presentaion"+"/-1-/"+ "I am attending presentation right now. Please Call me after some time."+"/-1-/"+ "assets/images/1.png"+"/-1-/"+ Colors.orange.value.toString()+"/-1-/"+ Colors.purple.value.toString()+"/-1-/"+ Colors.amber.value.toString()+"/-1-/"+(true).toString()+"/-1-/" + (0).toString()+"/-1-/"+ (0).toString();
+presetString = "Presentaion"+"/-1-/"+ "I am attending presentation right now. Please Call me after some time."+"/-1-/"+ "assets/images/1.png"+"/-1-/"+ Colors.orange.value.toString()+"/-1-/"+ Colors.purple.value.toString()+"/-1-/"+ Colors.amber.value.toString()+"/-1-/"+(true).toString()+"/-1-/" + (0).toString()+"/-1-/"+ (0).toString()+"/-1-/"+(3600).toString();
 presetStrings.add(presetString);
-presetString = "Travelling"+"/-1-/"+ "I am travelling right now. Please Call me after some time."+"/-1-/"+ "assets/images/1.png"+"/-1-/"+ Colors.orange.value.toString()+"/-1-/"+ Colors.purple.value.toString()+"/-1-/"+ Colors.amber.value.toString()+"/-1-/"+(true).toString()+"/-1-/" + (0).toString()+"/-1-/"+ (0).toString();
+presetString = "Travelling"+"/-1-/"+ "I am travelling right now. Please Call me after some time."+"/-1-/"+ "assets/images/1.png"+"/-1-/"+ Colors.orange.value.toString()+"/-1-/"+ Colors.purple.value.toString()+"/-1-/"+ Colors.amber.value.toString()+"/-1-/"+(true).toString()+"/-1-/" + (0).toString()+"/-1-/"+ (0).toString()+"/-1-/"+(3600).toString();
 presetStrings.add(presetString);
-presetString = "Quiz"+"/-1-/"+ "I am solving online quiz right now. Please Call me after some time."+"/-1-/"+ "assets/images/1.png"+"/-1-/"+ Colors.orange.value.toString()+"/-1-/"+ Colors.purple.value.toString()+"/-1-/"+ Colors.amber.value.toString()+"/-1-/"+(true).toString()+"/-1-/" + (0).toString()+"/-1-/"+ (0).toString();
+presetString = "Quiz"+"/-1-/"+ "I am solving online quiz right now. Please Call me after some time."+"/-1-/"+ "assets/images/1.png"+"/-1-/"+ Colors.orange.value.toString()+"/-1-/"+ Colors.purple.value.toString()+"/-1-/"+ Colors.amber.value.toString()+"/-1-/"+(true).toString()+"/-1-/" + (0).toString()+"/-1-/"+ (0).toString()+"/-1-/"+(3600).toString();
 presetStrings.add(presetString);
-presetString = "Gaming"+"/-1-/"+ "I am playing onlinegame right now. Please Call me after some time."+"/-1-/"+ "assets/images/1.png"+"/-1-/"+ Colors.orange.value.toString()+"/-1-/"+ Colors.purple.value.toString()+"/-1-/"+ Colors.amber.value.toString()+"/-1-/"+(true).toString()+"/-1-/" + (0).toString()+"/-1-/"+ (0).toString();
+presetString = "Gaming"+"/-1-/"+ "I am playing onlinegame right now. Please Call me after some time."+"/-1-/"+ "assets/images/1.png"+"/-1-/"+ Colors.orange.value.toString()+"/-1-/"+ Colors.purple.value.toString()+"/-1-/"+ Colors.amber.value.toString()+"/-1-/"+(true).toString()+"/-1-/" + (0).toString()+"/-1-/"+ (0).toString()+"/-1-/"+(3600).toString();
 presetStrings.add(presetString);
-presetString = "Meeting"+"/-1-/"+ "In a metting right now. Please Call me after some time."+"/-1-/"+ "assets/images/1.png"+"/-1-/"+ Colors.orange.value.toString()+"/-1-/"+ Colors.purple.value.toString()+"/-1-/"+ Colors.amber.value.toString()+"/-1-/"+(true).toString()+"/-1-/" + (0).toString()+"/-1-/"+ (0).toString();
+presetString = "Meeting"+"/-1-/"+ "In a metting right now. Please Call me after some time."+"/-1-/"+ "assets/images/1.png"+"/-1-/"+ Colors.orange.value.toString()+"/-1-/"+ Colors.purple.value.toString()+"/-1-/"+ Colors.amber.value.toString()+"/-1-/"+(true).toString()+"/-1-/" + (0).toString()+"/-1-/"+ (0).toString()+"/-1-/"+(3600).toString();
 presetStrings.add(presetString);
 }
 
@@ -45,7 +45,7 @@ MyDialog presetStringToDialog(String presetString)
 String phone = FirebaseLoginHandler.phone;
 var params = presetString.split("/-1-/");
 
-MyDialog myDialog = MyDialog(params[0], params[1], phone, params[2], int.parse(params[3]), int.parse(params[4]), int.parse(params[5]), params[6].toLowerCase()=="true", false, double.parse(params[7]), double.parse(params[8]));
+MyDialog myDialog = MyDialog(params[0], params[1], phone, params[2], int.parse(params[3]), int.parse(params[4]), int.parse(params[5]), params[6].toLowerCase()=="true", true, double.parse(params[7]), double.parse(params[8]), int.parse(params[9]));
 return myDialog;
 
 }
@@ -62,7 +62,8 @@ presetString+=myDialog.titleColor.toString()+seperator;
 presetString+=myDialog.statusColor.toString()+seperator;
 presetString+=myDialog.isLocalImage.toString()+seperator;
 presetString+=myDialog.sidePadding.toString()+seperator;
-presetString+=myDialog.topPadding.toString();
+presetString+=myDialog.topPadding.toString()+seperator;
+presetString+=(3600).toString();
 return presetString;
 
 }

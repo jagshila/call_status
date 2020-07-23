@@ -72,6 +72,9 @@ Row(children: <Widget>[
                   max: 100,
                   value: widget.myDialog.topPadding,
                   onChanged: (value) {
+                    double diff=widget.myDialog.topPadding-value;
+                    int modDiff=diff.isNegative?diff.floor()*-1:diff.floor();
+                    if(modDiff<25)
                     setState(() {
                       widget.myDialog.topPadding = value;
                     });
@@ -92,6 +95,9 @@ Row(children: <Widget>[
                   max: 100,
                   value: widget.myDialog.sidePadding,
                   onChanged: (value) {
+                    double diff=widget.myDialog.sidePadding-value;
+                    int modDiff=diff.isNegative?diff.floor()*-1:diff.floor();
+                    if(modDiff<25)
                     setState(() {
                       widget.myDialog.sidePadding = value;
                     });
@@ -102,6 +108,27 @@ Row(children: <Widget>[
 ],),
 ),
 
+createInputWidget(
+Row(children: <Widget>[
+           Text("Active time"),
+            Expanded(
+                child: Slider(
+                  min: 3600,
+                  max: 86400,
+                  value: widget.myDialog.timeToDisplay*1.0,
+                  onChanged: (value) {
+                    double diff=widget.myDialog.timeToDisplay-value;
+                    int modDiff=diff.isNegative?diff.floor()*-1:diff.floor();
+                    if(modDiff<16000)
+                    setState(() {
+                      widget.myDialog.timeToDisplay =value.floor();
+                    });
+                  },
+                ),
+            ),
+
+],),
+),
 createInputWidget(buildBackground(context)),
 
            
@@ -274,6 +301,8 @@ backgroundColor: Color(widget.myDialog.titleColor),
 
 
   }
+
+
 
 
     void changeBgColor() async {

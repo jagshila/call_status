@@ -1,3 +1,5 @@
+//import 'package:callstatus/ui/myDialogEditor.dart';
+import 'package:callstatus/uiComponents/myTimerDisplay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:callstatus/handler/dialogHandler.dart';
@@ -96,14 +98,33 @@ class CustomDialog extends StatelessWidget {
                       
                   ),
                 ),
+ myDialog.isEditing?
+                Text(durationToTextWidget(),
+                style: TextStyle(color: Color(myDialog.statusColor)),
+                )
+                :
+                MyTimerDisplay(timeToDisplay:myDialog.timeToDisplay, style: TextStyle(color: Color(myDialog.statusColor)))
+       
+                
               ],
             ),
           ),
         ),
 
+        
+                         
+
       ],
     );
   }
+
+ String durationToTextWidget() {
+   Duration duration = Duration(seconds:myDialog.timeToDisplay);
+     String twoDigits(int n) => n.toString().padLeft(2, "0");
+  String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+  String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+   return "${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds";
+   }
 
 
    _makePhoneCall(String phone) async {
@@ -151,6 +172,13 @@ class CustomDialog extends StatelessWidget {
 main()=>runApp(MaterialApp(
 
   home:MyDialogEditor()
+));
+*/
+
+/*
+main()=>runApp(MaterialApp(
+
+  home:Scaffold(body: MyDialogEditor(myDialog: MyDialog.getInitialDialog(),))
 ));
 */
 

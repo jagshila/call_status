@@ -136,7 +136,10 @@ contactIndex++;
       return false;
   }
 
- Widget appBarTitle = new Text("Call status");
+ Widget appBarTitle = new Text("Call status",
+                                 style: TextStyle(color: Colors.white),
+
+ );
   Icon actionIcon = new Icon(Icons.search);
 
 
@@ -195,7 +198,8 @@ _contactsWithExtra.addAll(contacts);
           label: Text("Add Status"),
           onPressed:()=>Navigator.push(context, MaterialPageRoute(builder:(context)=>PresetDialogDisplay() ))),
         appBar: new AppBar(
-          backgroundColor: Color.fromARGB(20, 120, 20, 20),
+         // backgroundColor: Colors.orange,
+         leading: Container(),
         centerTitle: true,
         title:appBarTitle,
         actions: <Widget>[
@@ -209,7 +213,9 @@ _contactsWithExtra.addAll(contacts);
                               }
                               else {
                                 this.actionIcon = new Icon(Icons.search);
-                                this.appBarTitle = new Text("Call Status");
+                                this.appBarTitle = new Text("Call Status",
+                                style: TextStyle(color: Colors.white),
+                                );
                                 searchController.text="";
                               }
 

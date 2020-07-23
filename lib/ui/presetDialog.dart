@@ -46,7 +46,7 @@ else
                    ),
                    Expanded(
                                        child: ListView.builder(
-                       itemCount: PresetDialogs.presetStrings.length,
+                       itemCount: PresetDialogs.presetStrings!=null?PresetDialogs.presetStrings.length:0,
                        itemBuilder: (context,index){
 return GestureDetector(
   
