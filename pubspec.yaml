@@ -30,6 +30,8 @@ dependencies:
   firebase_auth: ^0.16.1
   cloud_firestore: ^0.13.7
   flutter_material_color_picker: ^1.0.5
+  scrollable_positioned_list: ^0.1.7
+  flutter_xlider: ^3.4.0
 
 
 

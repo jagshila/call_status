@@ -28,7 +28,13 @@ Uint8List avatar;
 static List<String> storedContactHash=[];
 static List<String> storedAvatarHash=[];
 static List<MyContact> recentContacts=[];
+static List<MyContact> contacts = [];
+static List<Contact>  tempContacts = [];
+static bool recentFetched=false;
+static bool contactFetched=false;
 var avatarColor;
+static String countryCode="";
+
 
 MyContact(){
   avatarColor=AvatarColor.getColor();
@@ -37,6 +43,7 @@ MyContact(){
 
 
 static Future<bool> fetchRecentContacts() async{
+  recentFetched=true;
    return MyContact.getContactHashFromSharedPref().then((storedContactHashArray) {
       if(storedContactHashArray==null)
       return false;
@@ -61,6 +68,54 @@ print(contactHash);
     });
 }
 
+static Future<bool> fetchAllAvatars() async{
+
+int contactIndex=0;
+        for (final contact in tempContacts) {
+        Uint8List nullAvatar = Uint8List(2);
+        Uint8List _avatar = await ContactsService.getAvatar(contact);
+        if (_avatar == null) 
+        contacts[contactIndex].avatar=nullAvatar; // Don't redraw if no change.
+        else
+       contacts[contactIndex].avatar=_avatar;
+contactIndex++;
+        
+    
+    }
+
+    tempContacts=[];
+    return true;
+
+}
+
+resetContactHash(){
+recentContacts=[];
+  storedContactHash=[];
+  storedAvatarHash=[];
+saveArrayToPref("contactHash", null);
+saveArrayToPref("avatarHash", null);}
+
+
+
+static Future<bool> fetchAllContacts() async{
+   contactFetched = true;
+
+MyContact _myContact;
+    List<Contact> _contacts = (await ContactsService.getContacts(withThumbnails: false)).toList();
+    _contacts.sort((a,b)=>a.displayName.compareTo(b.displayName));
+    _contacts.forEach((contact) {
+
+     _myContact=new MyContact();
+     _myContact.setUsingContact(contact);
+contacts.add(_myContact);
+    });
+ tempContacts.addAll(_contacts);
+ return true;
+ }
+
+static setCountryCode() async{
+countryCode=await getStringPref("countryCode");
+}
 
 setUsingContact(Contact contact){
     var  _phones=<String>[];
@@ -87,11 +142,12 @@ _phones.add(_validateContact(phone.value));
 
  String _validateContact(String phone)
   {
+
     phone=phone.replaceAll(new RegExp(r'[^0-9+]'),'');
     if(phone[0]=='0')
       phone=phone.substring(1);
     if(phone[0]!='+')
-      phone="+91"+phone;
+      phone=countryCode+phone;
     return phone;
 
   }

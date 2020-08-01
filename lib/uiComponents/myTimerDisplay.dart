@@ -13,10 +13,11 @@ class MyTimerDisplay extends StatefulWidget {
 class _MyTimerDisplayState extends State<MyTimerDisplay> {
   int timeLeft;
 String timeString="Time";
+Timer timer;
   @override
   void initState() {
     timeLeft=widget.timeToDisplay;
-    Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
+    timer=Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime(t));
     super.initState();
   }
 
@@ -37,7 +38,7 @@ String timeString="Time";
   }
 
 
-  _getTime() {
+  _getTime(timer) {
     if(timeLeft!=null)
     if(timeLeft>0)
 {timeLeft--;
@@ -52,10 +53,20 @@ Duration duration= Duration(seconds: timeLeft);
   });
 }
 else if(timeLeft==0)
-setState(() {
+{setState(() {
   timeString="Ready";
+
 });
+timer.cancel();}
 }
+
+
+@override
+  void dispose() {
+timer.cancel();
+super.dispose();
+  }
+
 }
 
 

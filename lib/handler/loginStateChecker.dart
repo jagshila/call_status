@@ -1,3 +1,4 @@
+import 'package:callstatus/ui/loginNew.dart';
 import 'package:flutter/material.dart';
 import 'firebaseLoginHandler.dart';
 import 'package:callstatus/ui/mainContainer.dart';
@@ -16,20 +17,22 @@ class LoginStateChecker extends StatelessWidget {
    
 
 
- FirebaseLoginHandler().isUserLoggedIn().then((value) => 
+ FirebaseLoginHandler().isUserLoggedIn().then((value)
     {    
       
-
+Navigator.pop(context);
   if(value)
   Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => DisplayAllContacts()),
-  )
+  //  MaterialPageRoute(builder: (context) => DisplayAllContacts()),
+  MaterialPageRoute(builder: (context)=>MainContainer2())
+  );
   else
   Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => Login()),
-  )
+  //  MaterialPageRoute(builder: (context) => Login()),
+  MaterialPageRoute(builder: (context) => TermsAndConditionsPage(),)
+  );
     }
     );
 
@@ -44,7 +47,7 @@ MainContainer(
   
     children:[
   
-  CircularProgressIndicator(backgroundColor: Colors.red,),
+  CircularProgressIndicator(),
   
               Text("Checking Login Status", 
   

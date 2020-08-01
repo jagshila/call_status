@@ -23,7 +23,9 @@ class _MyContactDisplayState extends State<MyContactDisplay> {
 
   @override
   Widget build(BuildContext context) {
-    return contactDisplay(widget.contact);
+    return Container(
+      decoration: BoxDecoration(border: Border(bottom:BorderSide(color: Colors.black12))),
+      child: contactDisplay(widget.contact));
   }
 
 
@@ -44,8 +46,9 @@ class _MyContactDisplayState extends State<MyContactDisplay> {
   ExpansionTile multiPhonesContactDisplay(contact) {
     return ExpansionTile(
                     title: Text(contact.displayName),
+                    subtitle: Container(child: Text("Tap to show")),
                       children: getAll(contact),
-                    leading: setAvatar(contact)
+                    leading: setAvatar(contact),
                 );
   }
 
@@ -78,23 +81,21 @@ class _MyContactDisplayState extends State<MyContactDisplay> {
                   );
   }
 
-  GestureDetector singlePhoneContactDisplay( MyContact contact) {
-    return GestureDetector(
-                onTap:(){_setDialog(contact.phones[0]);
-                contact.contactClicked();
-                widget.stateSetter();
-                },
-                child:ListTile
-                (
-                    title: Text(contact.displayName),
-                    subtitle: Text(contact.phones[0]),
+  Widget singlePhoneContactDisplay( MyContact contact) {
+    return ListTile
+    (
+        title: Text(contact.displayName),
+        subtitle: Text(contact.phones[0]),
 
-                    
+        
 
 
-                    leading: setAvatar(contact)
-                )
-                );
+        leading: setAvatar(contact),
+        onTap: (){_setDialog(contact.phones[0]);
+    contact.contactClicked();
+    widget.stateSetter();
+    },
+    );
   }
 
 

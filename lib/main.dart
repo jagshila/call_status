@@ -14,6 +14,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     return myMaterialApp();
     
 
@@ -26,7 +28,10 @@ Widget myMaterialApp()
 return     MaterialApp(
         title: 'Call Status',
         theme: ThemeData(
-          primarySwatch: Colors.cyan,
+          primarySwatch: Colors.green,
+          primaryColor: Colors.teal[800],
+
+
         ),
      home:LoginStateChecker()
 

@@ -22,10 +22,15 @@ class MyDialogEditor extends StatefulWidget {
 
 class _MyDialogEditorState extends State<MyDialogEditor> {
 
+TextEditingController titleController = TextEditingController(), statusController = TextEditingController();
+
+
 @override
   void initState() {
     super.initState();
 widget.myDialog.isEditing=true;
+titleController.text=widget.myDialog.title;
+statusController.text=widget.myDialog.status;
   }
 
   @override
@@ -72,6 +77,7 @@ Row(children: <Widget>[
                   max: 100,
                   value: widget.myDialog.topPadding,
                   onChanged: (value) {
+                    FocusScope.of(context).unfocus();
                     double diff=widget.myDialog.topPadding-value;
                     int modDiff=diff.isNegative?diff.floor()*-1:diff.floor();
                     if(modDiff<25)
@@ -95,6 +101,7 @@ Row(children: <Widget>[
                   max: 100,
                   value: widget.myDialog.sidePadding,
                   onChanged: (value) {
+                    FocusScope.of(context).unfocus();
                     double diff=widget.myDialog.sidePadding-value;
                     int modDiff=diff.isNegative?diff.floor()*-1:diff.floor();
                     if(modDiff<25)
@@ -117,6 +124,7 @@ Row(children: <Widget>[
                   max: 86400,
                   value: widget.myDialog.timeToDisplay*1.0,
                   onChanged: (value) {
+                    FocusScope.of(context).unfocus();
                     double diff=widget.myDialog.timeToDisplay-value;
                     int modDiff=diff.isNegative?diff.floor()*-1:diff.floor();
                     if(modDiff<16000)
@@ -140,7 +148,7 @@ createInputWidget(buildBackground(context)),
                 children: <Widget>[
                   GestureDetector(
                    onTap:(){
-                                               FocusScope.of(context).requestFocus(FocusNode());
+FocusScope.of(context).unfocus();
                      showDialog(context: context,
              child: CustomDialog(
       myDialog: widget.myDialog,
@@ -151,8 +159,8 @@ child:roundedRectButton("View", signInGradients,2, false),
              
              GestureDetector(
                    onTap:(){
-                FocusScope.of(context).requestFocus(FocusNode());
-                Navigator.pop(context);
+FocusScope.of(context).unfocus();
+
                 Navigator.pop(context);
 
                 showDialog(context: context,
@@ -232,11 +240,20 @@ onChangeImage: changeBgImage,
 )
 ),
 GestureDetector(
-onTap: () { changeBgColor();},
+onTap: () { changeBgColor();
+FocusScope.of(context).unfocus();
+},
 child:
 CircleAvatar(
-backgroundColor: Color(widget.myDialog.bgColor),
-
+  backgroundColor: Colors.black38,
+  radius: 20,
+  child:   CircleAvatar(
+  
+  backgroundColor: Color(widget.myDialog.bgColor),
+  
+  radius: 19,
+  
+  ),
 )
 )
 ,
@@ -255,6 +272,7 @@ widget.myDialog.isLocalImage=true;
 SizedBox(width: MediaQuery.of(context).size.width-110,
 child:
 TextField(
+  controller: statusController,
 decoration: InputDecoration(
   hintText: "Status"
 ),
@@ -265,11 +283,20 @@ widget.myDialog.status=value;
 )),
 
 GestureDetector(
-onTap: () {changeStatusColor();},
+onTap: () {changeStatusColor();
+FocusScope.of(context).unfocus();
+},
 child:
 CircleAvatar(
-
-backgroundColor: Color(widget.myDialog.statusColor),
+    backgroundColor: Colors.black38,
+  radius: 20,
+  child:   CircleAvatar(
+  
+  radius: 19,
+  
+  backgroundColor: Color(widget.myDialog.statusColor),
+  
+  ),
 )),
 ],);
   }
@@ -280,7 +307,7 @@ backgroundColor: Color(widget.myDialog.statusColor),
 SizedBox(width: MediaQuery.of(context).size.width-110,
 child:
 TextField(
-
+controller: titleController,
 decoration: InputDecoration(
   hintText: "Title"
 ),
@@ -289,11 +316,19 @@ widget.myDialog.title=value;
 }),
 )),
 GestureDetector(
-onTap: () { changeTitleColor();},
+onTap: () { FocusScope.of(context).unfocus();
+changeTitleColor();},
 child:
+
 CircleAvatar(
-foregroundColor: Colors.red,
-backgroundColor: Color(widget.myDialog.titleColor),
+    backgroundColor: Colors.black38,
+  radius: 20,
+  child:   CircleAvatar(
+  
+  backgroundColor: Color(widget.myDialog.titleColor),
+  radius:19
+  
+  ),
 )
 ),
 ],)

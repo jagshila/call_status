@@ -2,8 +2,10 @@
 import 'package:callstatus/handler/loginStateChecker.dart';
 import 'package:callstatus/ui/displayAllContacts.dart';
 import 'package:callstatus/ui/login.dart';
+import 'package:callstatus/ui/loginNew.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:callstatus/ui/mainContainer.dart';
 class FirebaseLoginHandler{
 String _verificationId;
 String _message;
@@ -103,8 +105,10 @@ await _auth.verifyPhoneNumber(
       verificationId: _verificationId,
       smsCode: otp,
     );
+try{
     final FirebaseUser user =
         (await _auth.signInWithCredential(credential)).user;
+
     final FirebaseUser currentUser = await _auth.currentUser();
     assert(user.uid == currentUser.uid);
 
@@ -132,13 +136,35 @@ print(_message);
         _message = 'Sign in failed';
         loginFailedRedirect(context);
       }
+      }
+      catch(error){
+        showDialog(
+          barrierDismissible: false,
+          context: context, 
+        child: AlertDialog(
+          title: Column(children:[
+            Icon(Icons.error, color: Colors.red,size: 80,),
+            Text("Invalid Code!")]),
+          content: Text("Click resend SMS to receive code again. Please provide valid code received in SMS."),
+          actions: <Widget>[
+            FlatButton(child: Text("OK"),
+            onPressed: () { Navigator.pop(context);
+            Navigator.pop(context);
+            }
+            )
+          ],
+        )
+        );
+        print(error.code);
+        print(error.message);        
+      }
   }
 
 
-void signOut()  async{
+static void signOut(context)  async{
     await FirebaseAuth.instance.signOut().then((val){
-      _message="Signout Successfull";
-
+Navigator.pop(context);
+Navigator.push(context, MaterialPageRoute(builder: (context) => LoginStateChecker(),));
     });
     
 }
@@ -149,9 +175,12 @@ void loginSuccessRedirect(context){
             Scaffold.of(context).showSnackBar(const SnackBar(
         content: Text('Sign in successfull.'),
       ));
+      Navigator.popUntil(context, (route) => route.isFirst);
+      Navigator.pop(context);
 Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => DisplayAllContacts()),
+   // MaterialPageRoute(builder: (context) => DisplayAllContacts()),
+  MaterialPageRoute(builder: (context) => MainContainer2()),
   );
 }
 
@@ -160,9 +189,13 @@ void loginFailedRedirect(context)
             Scaffold.of(context).showSnackBar(const SnackBar(
         content: Text('Sign in failed. Please try again.'),
       ));
+      Navigator.pop(context);
 Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => Login()),
+   // MaterialPageRoute(builder: (context) => Login()),
+
+    MaterialPageRoute(builder: (context) => LoginPage()),
+
   );
 
 }

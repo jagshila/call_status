@@ -5,7 +5,6 @@ import 'package:callstatus/ui/mainContainer.dart';
 import 'package:callstatus/handler/backButton.dart';
 import 'package:callstatus/uiComponents/myContactDisplay.dart';
 import 'package:callstatus/ui/presetDialog.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class DisplayAllContacts extends StatefulWidget {
   DisplayAllContacts({Key key}) : super(key: key);
